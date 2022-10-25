@@ -32,32 +32,24 @@ Window {
             consumption_gauge.rpm = vehicle.consumption
         }
         onGearChanged: {
-            gear_rec.curr_gear = vehicle.gear
+            gear_display.cur_gear = vehicle.gear
+        }
+        onMileageChanged: {
+            mileage_display.cur_mileage = vehicle.mileage
         }
     }
 
-
-    Rectangle{
-        id: gear_rec
-        x: 650
-        y:0
-        width: 50
-        height: 50
-        Text {
-            id: gear_rec_text
-            anchors.fill: parent
-            text: ""
-        }
-
-        property int max_gears: vehicle.maxGear
-        property int curr_gear: vehicle.gear
-        onCurr_gearChanged: {
-            if (vehicle.gear === 0) gear_rec_text.text = "leer";
-            else if (vehicle.gear ===-1) gear_rec_text.text = "R";
-            else gear_rec_text.text = vehicle.gear;
-        }
+    MileageDisplay{
+        id: mileage_display
+        cur_mileage: vehicle.mileage
     }
 
+    GearDisplay {
+        id: gear_display
+        max_gears: 6
+        cur_gear: 0
+
+    }
 
 
     HeadingSlider{
@@ -129,8 +121,6 @@ Window {
 
 
 
-
-
     Item {
         id: huditem
         focus: true
@@ -148,19 +138,11 @@ Window {
             if ( event.key === Qt.Key_Up ) {
                 vehicle.velocity += 5;
                 vehicle.rpm += 200;
-
-                //vehicle.consumption += 0.2
-                //rpm_gauge.v += 200
-                //consumption_gauge.rpm = consumption_gauge.rpm + 200
             }
 
             if ( event.key === Qt.Key_Down ) {
                 vehicle.velocity -= 5;
                 vehicle.rpm -= 200;
-
-                //vehicle.consumption -= 200
-                //rpm_gauge.v -= 200
-                //consumption_gauge.rpm = consumption_gauge.rpm -200;
             }
             if ( event.key === Qt.Key_C ) {
                 rpm_gauge.displayConsumption = !rpm_gauge.displayConsumption

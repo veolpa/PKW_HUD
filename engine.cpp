@@ -1,6 +1,6 @@
 #include "engine.h"
 
-Engine::Engine() : Mileage()
+Engine::Engine() : Mileage("mileage.txt")
 {
 
 }

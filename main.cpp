@@ -5,7 +5,6 @@
 #include "velocity.h"
 #include "rpm_bar_gauge.h"
 #include "velocitygauge.h"
-#include "mileage.h"
 #include "vehicle.h"
 
 // 0164 145 75 30 kai mobil
@@ -15,15 +14,6 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    Mileage m(156);
-    m.setMileageFName("mileage.txt");
-    m.writeMileageToFile();
-    qDebug() << QString::number(m.getMileage());
-    m.setMileage(200);
-    qDebug() << QString::number(m.getMileage());
-    m.readMileageFromFile();
-
-    qDebug() << QString::number(m.getMileage());
 
     qmlRegisterType<Heading>        ("volvera.de", 1,0, "Heading");
     qmlRegisterType<Velocity>       ("volvera.de", 1,0, "Velocity");

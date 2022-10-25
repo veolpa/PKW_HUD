@@ -5,11 +5,19 @@ Mileage::Mileage(int p_mileage) {
     mileage = p_mileage;
     emit mileageChanged();
 }
+
 Mileage::Mileage(QString p_filename) {
     mileage_fname = p_filename;
+    QFile f(mileage_fname);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "mileage file not found ! Creating it...";
+        if(f.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&f);
+            out << QString::number(mileage);
+        } else qDebug() << "creation failed !";
+    }
+    f.close();
 }
-
-
 
 int Mileage::getMileage() {
     return mileage;
@@ -56,3 +64,6 @@ void Mileage::writeMileageToFile() {
     else qDebug() << "file not found !";
 }
 
+Mileage::~Mileage() {
+    writeMileageToFile();
+}

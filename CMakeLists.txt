@@ -23,7 +23,11 @@ qt_add_executable(appPKW_HUD
 qt_add_qml_module(appPKW_HUD
     URI PKW_HUD
     VERSION 1.0
-    QML_FILES main.qml HeadingSlider.qml
+    QML_FILES
+        main.qml
+        HeadingSlider.qml
+        GearDisplay.qml
+        MileageDisplay.qml
 )
 
 set_target_properties(appPKW_HUD PROPERTIES
