@@ -8,6 +8,16 @@
 #include "vehicle.h"
 
 // 0164 145 75 30 kai mobil
+// git remote add origin https://github.com/veolpa/PKW_HUD.git
+//            repo state info:
+// git status
+//            adding all changed/new files to the current stage:
+// git add .
+// git status
+//            commiting staged files / preparing changes to merge/push:
+// git commit -m "short commit message - describe changes"
+//            pushes changes to github / local and server repo have the same state:
+// git -u push origin main
 
 
 int main(int argc, char *argv[])
