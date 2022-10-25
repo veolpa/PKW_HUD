@@ -6,19 +6,23 @@
 #include <QObject>
 #include <vector>
 
+//      Klasse zur Darstellung von Umdrehungen/Minute oder Sprit-Verbrauch in Bezug zu einem maximal möglichen Wert
+//      von grün bis rot wachsenden Balkendarstellung
+
+
 
 class RPM_Bar_Gauge : public QQuickPaintedItem
 {
     Q_OBJECT
-    Q_PROPERTY (int rpm      READ rpm      WRITE setRpm      NOTIFY rpmChanged)
-    Q_PROPERTY (int maxRpm   READ maxRpm   WRITE setMaxRpm   NOTIFY maxRpmChanged)
-    //Q_PROPERTY (int barWidth READ barWidth WRITE setBarWidth NOTIFY barWidthChanged)
-    Q_PROPERTY(int gWidth    READ gWidth   WRITE setgWidth   NOTIFY gWidthChanged)
-    Q_PROPERTY(int gHeight   READ gHeight  WRITE setgHeight   NOTIFY gHeightChanged)
-    Q_PROPERTY(bool displayConsumption READ displayConsumption WRITE setDisplayConsumption NOTIFY displayConsumptionChanged)
 
-    int m_rpm;
-    int m_maxRpm;
+    Q_PROPERTY (int rpm       READ rpm      WRITE setRpm        NOTIFY rpmChanged)
+    Q_PROPERTY (int maxRpm    READ maxRpm   WRITE setMaxRpm     NOTIFY maxRpmChanged)
+    Q_PROPERTY (int gWidth    READ gWidth   WRITE setgWidth     NOTIFY gWidthChanged)
+    Q_PROPERTY (int gHeight   READ gHeight  WRITE setgHeight    NOTIFY gHeightChanged)
+    Q_PROPERTY (bool displayConsumption READ displayConsumption WRITE setDisplayConsumption NOTIFY displayConsumptionChanged)
+
+    int m_rpm;          // aktuelle Umdrehungen/Minute
+    int m_maxRpm;       //
     int m_gWidth;
     int m_gHeight;
     bool m_display_consumption;

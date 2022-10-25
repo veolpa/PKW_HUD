@@ -3,8 +3,6 @@
 #include <QString>
 #include <QObject>
 
-//enum {north,northeast,east, southeast,south,southwest,west, northwest};
-//enum class Heavenly_Orientation {north=0, northeast=45, east=90, southeast=135, south=180, southwest=225, west=270, northwest=315 };
 
 constexpr int north=0;
 constexpr int northeast=45;
@@ -19,20 +17,20 @@ class Heading : public QObject
 {
     Q_OBJECT
 
-
     Q_PROPERTY( QString to_NEWS READ to_NEWS)
-
     Q_PROPERTY( int heading READ getHeading WRITE setHeading NOTIFY headingChanged)
 
-int heading;
+int heading;                        // Himmelsrichtung 0-360°       (getter / setter siehe unten)
 public:
 
     Heading(int p_heading=0);
 
-    int getHeading();    void setHeading(int p);
-    QString to_NEWS();
+    int getHeading();
+    void setHeading(int p);
+    QString to_NEWS();              // gibt Himmelsrichtung zurück (N, NW etc)
+
 signals:
-    void headingChanged();
+    void headingChanged();          // wird emitiert wenn sich Richtung ändert
 };
 
 #endif // HEADING_H

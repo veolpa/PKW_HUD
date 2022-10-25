@@ -101,16 +101,13 @@ void RPM_Bar_Gauge::paint(QPainter *painter) {
 
     QString rpm_str;
     rpm_str.setNum(m_rpm);
-    double dsp = 20.0 / static_cast<double>(m_maxRpm) * static_cast<double>(m_rpm);
+    double dsp = static_cast<double>(maxRpm()) / static_cast<double>(m_maxRpm) * static_cast<double>(m_rpm);
 
     if (m_display_consumption) {
         rpm_str = QLocale().toString(dsp,'g',2);
-
     }
 
-    int ty= (max_bars*bar_height)-((max_steps)*bar_height);
-
-
+    int ty = (max_bars*bar_height)-((max_steps)*bar_height);
     painter->drawText(QRect(0, ty, width, bar_height), Qt::AlignCenter,rpm_str );
     //painter->restore();
 

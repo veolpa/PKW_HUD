@@ -13,25 +13,25 @@ class Mileage : public QObject
     Q_PROPERTY(int mileage READ getMileage WRITE setMileage NOTIFY mileageChanged)
 
 protected:
-    QString mileage_fname;
-    int mileage;
+    QString mileage_fname;      // Dateiname der Persistenz gelaufener Kilometer
+    int mileage;                // gelaufene Kilometer
 
 public:
-    Mileage(int p_mileage=0);
-    Mileage(QString p_fname);
+    Mileage(int p_mileage=0);                   // std-constructor
+    Mileage(QString p_fname);                   // constructor veranlasst das Setzen der gelaufenen km auf den in p_fname hinterlegtem Wert
 
 
-    int getMileage();
-    void setMileage(int p_mileage);
-    void addMileage(int p_mileage_delta);
+    int getMileage();                           // gibt aktuell gelaufene km zurück
+    void setMileage(int p_mileage);             // setzt gelaufene km auf p_mileage
+    void addMileage(int p_mileage_delta);       // fügt gelaufenen km p_mileage_delta hinzu
 
-    QString getMileageFName();
-    void setMileageFName(QString p_fname);
-    void readMileageFromFile();
-    void writeMileageToFile();
+    QString getMileageFName();                  // ergibt den Namen der Datei in der gelaufene km gespeichert werden
+    void setMileageFName(QString p_fname);      // setzt den Namen der Datei in der gelaufene km gespeichert werden
+    void readMileageFromFile();                 // setzt gelaufene km(mileage) auf den in Datei (mileage_fname) hinterlegten Wert
+    void writeMileageToFile();                  // schreibt gelaufene km in Datei(mileage_fname)
 
 signals:
-    void mileageChanged();
+    void mileageChanged();                      // wird emitiert wenn sich der Zustand des Objektes verändert
 };
 
 #endif // MILEAGE_H

@@ -6,7 +6,7 @@ Vehicle::Vehicle() : Engine()
 }
 
 
-int getVelocity();    void setVelocity(int p);
+//int getVelocity();    void setVelocity(int p);
 
 int Vehicle::getVelocity(){
     return velocity;
@@ -14,4 +14,5 @@ int Vehicle::getVelocity(){
 
 void Vehicle::setVelocity(int p){
     velocity = p;
+    emit velocityChanged();
 }
