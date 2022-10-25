@@ -14,6 +14,7 @@ qt_add_executable(appPKW_HUD
     position.h position.cpp
     rpm_bar_gauge.h rpm_bar_gauge.cpp
     velocitygauge.h velocitygauge.cpp
+    mileage.h mileage.cpp
 )
 
 qt_add_qml_module(appPKW_HUD
