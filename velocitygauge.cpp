@@ -37,7 +37,7 @@ void VelocityGauge::paint(QPainter *painter){
 
 
     pen.setWidth(1);
-    pen.setColor(QColor("white"));
+    pen.setColor(QColor("#a6023b"));
     painter->setPen(pen);
     painter->drawRect(0,0,m_width-1, m_height-1);
     painter->drawEllipse(0,0,m_width-1,m_height-1);
@@ -50,7 +50,7 @@ void VelocityGauge::paint(QPainter *painter){
     int xc{x0 };
     int yc{y0 };
 
-    pen.setWidth(3);
+
     pen.setColor("blue");
     painter->setPen(pen);
 
@@ -59,19 +59,37 @@ void VelocityGauge::paint(QPainter *painter){
     double steps = 270 / static_cast<double>(m_v_max) ;
     double angle = -45 +(static_cast<double>(m_v) * steps);
 
-    painter->translate(xc,yc);
-    painter->rotate(angle);
-    painter->translate(-xc,-yc);
-    painter->drawLine(m_width/2, m_height/2, 0, m_height/2);
-
-
+    QString v_str;
     QFont font = painter->font();
     font.setPixelSize(20);
     pen.setColor("blue");
     painter->setPen(pen);
     painter->setFont(font);
 
-    QString v_str;
+
+
+
     v_str.setNum(m_v);
-    painter->drawText(QRect(0,0,m_width,m_height),Qt::AlignCenter, v_str);
+    painter->drawText(QRect(0,0,m_width,m_height/2),Qt::AlignCenter, v_str);
+
+
+    painter->translate(xc,yc);
+    painter->rotate(angle);
+    painter->translate(-xc,-yc);
+
+    pen.setColor("#3d0217");
+    pen.setWidth(6);
+    painter->setPen(pen);
+    painter->drawLine(m_width/2, m_height/2, 0, m_height/2);
+
+
+    pen.setColor("#a6023b");
+    pen.setWidth(4);
+    painter->setPen(pen);
+    painter->drawLine(m_width/2, m_height/2, 0, m_height/2);
+    pen.setColor("white");
+    pen.setWidth(1);
+    painter->setPen(pen);
+    painter->drawLine(m_width/2, m_height/2, 0, m_height/2);
+
 }

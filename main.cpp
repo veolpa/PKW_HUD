@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<VelocityGauge>  ("volvera.de", 1,0, "VelocityGauge");
     qmlRegisterType<Vehicle>        ("volvera.de", 1,0, "Vehicle");
 
+
 //    QQuickView view;
 //    view.setResizeMode(QQuickView::SizeRootObjectToView);
 //    view.setSource(QUrl(u"qrc:/PKW_HUD/main.qml"_qs));

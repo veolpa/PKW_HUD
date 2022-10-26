@@ -1,7 +1,7 @@
 import QtQuick
 
 Item {
-    property int cur_mileage:0
+    property int cur_mileage : 0
     x: 10
     y: 140
     width: 80
@@ -10,22 +10,25 @@ Item {
     Rectangle{
         id: mileage_rec
         anchors.fill: parent
-        color: "transparent"
-        border.color: "green"
-    }
-    Text{
-        id: mileage_text
-        anchors.fill: mileage_rec
-        fontSizeMode: Text.Fit
-        minimumPixelSize: 10;
-        font.pixelSize: 72
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        color: "green"
-        text: ""
+        color: "black"
+        border.color: "#a6023b"
+
+        Text{
+            id: mileage_text
+            text: cur_mileage +" meter"
+            color: "#a6023b"
+            anchors.fill: mileage_rec
+            fontSizeMode: Text.Fit
+            minimumPixelSize: 10;
+            font.pixelSize: 72
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+
     }
     onCur_mileageChanged:  {
-        mileage_text: cur_mileage
+        mileage_text.text = cur_mileage + " meter"
     }
 
 }

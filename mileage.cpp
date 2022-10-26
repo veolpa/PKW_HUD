@@ -17,6 +17,7 @@ Mileage::Mileage(QString p_filename) {
         } else qDebug() << "creation failed !";
     }
     f.close();
+    readMileageFromFile();
 }
 
 int Mileage::getMileage() {

@@ -11,7 +11,6 @@ qt_add_executable(appPKW_HUD
     main.cpp
     heading.h heading.cpp
     velocity.h velocity.cpp
-    position.h position.cpp
     rpm_bar_gauge.h rpm_bar_gauge.cpp
     velocitygauge.h velocitygauge.cpp
     mileage.h mileage.cpp

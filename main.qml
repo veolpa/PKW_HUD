@@ -23,10 +23,12 @@ Window {
 
         onVelocityChanged: {
             v_gauge.v = velocity;
+            mileage_display.cur_mileage = vehicle.mileage
+
         }
         onRpmChanged: {
             rpm_bars.rpm = vehicle.rpm;
-            rpm_gauge.v = vehicle.rpm;
+            rpm_gauge.v  = vehicle.rpm;
         }
         onConsumptionChanged: {
             consumption_gauge.rpm = vehicle.consumption
@@ -39,10 +41,6 @@ Window {
         }
     }
 
-    MileageDisplay{
-        id: mileage_display
-        cur_mileage: vehicle.mileage
-    }
 
     GearDisplay {
         id: gear_display
@@ -100,6 +98,17 @@ Window {
         v: 0
 
     }
+
+    MileageDisplay{
+        id: mileage_display
+        x: 220
+        y: 174
+        width: 200
+        height: 26
+        cur_mileage: vehicle.mileage
+
+    }
+
 
     VelocityGauge {
         id: rpm_gauge
