@@ -18,9 +18,17 @@ void Engine::setPerformance(int p){
     emit engineStateChanged();
 }
 
+int Engine::getIdleRPM(){  return idleRPM; }
+void Engine::setIdleRPM(int p) {
+    idleRPM = p;
+    emit engineStateChanged();
+}
+
+
+
 int Engine::getRPM() {  return rpm;  }
 void Engine::setRPM(int p){
-    if (p < 0)              rpm = 0;
+    if (p < idleRPM)        rpm = idleRPM;
     else if ( p > maxRPM )  rpm = maxRPM;
     else                    rpm = p;
 

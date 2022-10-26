@@ -27,6 +27,8 @@ qt_add_qml_module(appPKW_HUD
         HeadingSlider.qml
         GearDisplay.qml
         MileageDisplay.qml
+        TimeDisplay.qml
+        RearCameraDisplay.qml
 )
 
 set_target_properties(appPKW_HUD PROPERTIES

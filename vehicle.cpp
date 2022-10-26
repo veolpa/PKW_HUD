@@ -4,7 +4,13 @@ Vehicle::Vehicle() : Engine()
 {
     mileage_measure_timer = new QTimer(this);
     mileage_measure_timer->setTimerType(Qt::CoarseTimer);
+
+    time_timer = new QTimer(this);
+    time_timer->setTimerType(Qt::CoarseTimer);
+    time_timer->start(1000);
+
     connect (mileage_measure_timer, &QTimer::timeout, this, &Vehicle::measureDistance);
+    connect (time_timer, &QTimer::timeout, this, &Vehicle::updateTime);
 
 }
 
@@ -28,7 +34,22 @@ void Vehicle::setMaxVelocity(int p){
         emit velocityChanged();
 }
 
+QString Vehicle::getCurrentTime() {
+    return currentTime;
+}
+void Vehicle::setCurrentTime(QString p) {
+    currentTime = p;
+
+    emit currentTimeChanged();
+}
+
 void Vehicle::measureDistance(){
     double traveled_distance = velocity * 0.1;
     addMileage(static_cast<int>(traveled_distance));
 }
+
+void Vehicle::updateTime(){
+    setCurrentTime(QTime::currentTime().toString("hh:mm:ss"));
+}
+
+//void Vehicle::currentTimeChanged(){}

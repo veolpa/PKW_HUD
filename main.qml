@@ -10,6 +10,15 @@ Window {
 
     property int my_heading
 
+    TimeDisplay{
+        id: timeDisplay
+        x:0
+        y:0
+        width: mainWindow.width
+        height: 30
+
+    }
+
 
     Vehicle {
         id : vehicle
@@ -27,7 +36,7 @@ Window {
 
         }
         onRpmChanged: {
-            rpm_bars.rpm = vehicle.rpm;
+            //rpm_bars.rpm = vehicle.rpm;
             rpm_gauge.v  = vehicle.rpm;
         }
         onConsumptionChanged: {
@@ -38,6 +47,9 @@ Window {
         }
         onMileageChanged: {
             mileage_display.cur_mileage = vehicle.mileage
+        }
+        onCurrentTimeChanged:{
+            timeDisplay.time = currentTime;
         }
     }
 
@@ -57,39 +69,26 @@ Window {
     }
 
 
-    RPM_Bar_Gauge{
-        id: consumption_gauge
-        x: 90
-        y:0
-        width: 50
-        height:200;
 
-        gWidth: width
-        gHeight: height
-        maxRpm: vehicle.maxConsumption
-        rpm: vehicle.consumption
-        displayConsumption: true
-    }
+//    RPM_Bar_Gauge{
+//        id: rpm_bars
+//        x: 150
+//        y:0
+//        width: 50
+//        height:200;
 
-    RPM_Bar_Gauge{
-        id: rpm_bars
-        x: 150
-        y:0
-        width: 50
-        height:200;
-
-        gWidth: width
-        gHeight: height
-        maxRpm: vehicle.maxRPM
-        rpm: vehicle.rpm
-        displayConsumption: false
-    }
+//        gWidth: width
+//        gHeight: height
+//        maxRpm: vehicle.maxRPM
+//        rpm: vehicle.rpm
+//        displayConsumption: false
+//    }
 
 
     VelocityGauge {
         id: v_gauge
-        x: 220
-        y: 0
+        x: 100
+        y: 50
         width: 200
         height: 200
         mwidth: width
@@ -101,8 +100,8 @@ Window {
 
     MileageDisplay{
         id: mileage_display
-        x: 220
-        y: 174
+        x: v_gauge.x
+        y: v_gauge.y + v_gauge.height - 26
         width: 200
         height: 26
         cur_mileage: vehicle.mileage
@@ -112,10 +111,10 @@ Window {
 
     VelocityGauge {
         id: rpm_gauge
-        x: 440
-        y: 0
-        width: 200
-        height: 200
+        x: v_gauge.x+v_gauge.width+60
+        y: v_gauge.y
+        width: v_gauge.width
+        height: v_gauge.height
         mwidth: width
         mheight: height
         v_max: 8000
@@ -123,6 +122,19 @@ Window {
 
     }
 
+    RPM_Bar_Gauge{
+        id: consumption_gauge
+        x: v_gauge.x + v_gauge.width + 5
+        y: v_gauge.y
+        width: 50
+        height:v_gauge.height;
+
+        gWidth: width
+        gHeight: height
+        maxRpm: vehicle.maxConsumption
+        rpm: vehicle.consumption
+        displayConsumption: true
+    }
 
     onMy_headingChanged: {
         hds.heading_value = my_heading;
@@ -164,6 +176,9 @@ Window {
                 vehicle.gear -= 1;
             }
             if (event.key === Qt.Key_R) {
+                vehicle.velocity = 0;
+                vehicle.rpm = vehicle.idleRPM
+
                 vehicle.gear=-1;
             }
             if (event.key === Qt.Key_0) {
