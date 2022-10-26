@@ -2,7 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include "heading.h"
-#include "velocity.h"
 #include "rpm_bar_gauge.h"
 #include "velocitygauge.h"
 #include "vehicle.h"
@@ -26,7 +25,6 @@ int main(int argc, char *argv[])
 
 
     qmlRegisterType<Heading>        ("volvera.de", 1,0, "Heading");
-    qmlRegisterType<Velocity>       ("volvera.de", 1,0, "Velocity");
     qmlRegisterType<RPM_Bar_Gauge>  ("volvera.de", 1,0, "RPM_Bar_Gauge");
     qmlRegisterType<VelocityGauge>  ("volvera.de", 1,0, "VelocityGauge");
     qmlRegisterType<Vehicle>        ("volvera.de", 1,0, "Vehicle");

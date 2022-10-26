@@ -12,20 +12,26 @@ class Engine : public Mileage
     Q_PROPERTY(int idleRPM  READ getIdleRPM WRITE setIdleRPM    NOTIFY engineStateChanged)
     Q_PROPERTY(int gear     READ getGear    WRITE setGear       NOTIFY engineStateChanged)
     Q_PROPERTY(int maxGear  READ getMaxGear WRITE setMaxGear    NOTIFY engineStateChanged)
-    Q_PROPERTY(double consumption      READ getConsumption         WRITE setConsumption    NOTIFY engineStateChanged)
-    Q_PROPERTY(double maxConsumption   READ getMaxConsumption      WRITE setMaxConsumption NOTIFY engineStateChanged)
+    Q_PROPERTY(int throttle READ getThrottle WRITE setThrottle  NOTIFY engineStateChanged)
+    Q_PROPERTY(int brakes   READ getBrakes  WRITE setBrakes     NOTIFY engineStateChanged)
+
+    Q_PROPERTY(double consumption      READ getConsumption      WRITE setConsumption    NOTIFY engineStateChanged)
+    Q_PROPERTY(double maxConsumption   READ getMaxConsumption   WRITE setMaxConsumption NOTIFY engineStateChanged)
 
 
 protected:
     QString designation;        // Modell Bezeichnung                       (getter / setter siehe unten)
-
     int performance{75};        // kW                                       (getter / setter siehe unten)
+
+
 
     int rpm{0};                 // Umdrehungen / Minute                     (getter / setter siehe unten)
     int maxRPM{8000};           // Maximale Umdrehungen / Minute            (getter / setter siehe unten)
-    int idleRPM{800};
+    int idleRPM{800};           // Standgas
     int gear{0};                // aktueller Gang (Annahme: -1 bis maxGear) (getter / setter siehe unten)
     int maxGear{6};             // letzter Gang                             (getter / setter siehe unten)
+    int throttle{0};            // Gaspedal
+    int brakes{0};              // bremse
     double consumption{0.0};         // Verbrauch (direkt proportional zur Umdrehung)
     double maxConsumption{30.0};     // Maximaler Verbrauch
 
@@ -35,13 +41,16 @@ public:
     QString getDesignation();       void setDesignation(QString p);
     int getPerformance();           void setPerformance(int p);
 
+
     int getRPM();                   void setRPM(int p);
     int getMaxRPM();                void setMaxRPM(int p);
     int getIdleRPM();               void setIdleRPM(int p);
     int getGear();                  void setGear(int p);
     int getMaxGear();               void setMaxGear(int p);
-    double getConsumption();           void setConsumption(double p);
-    double getMaxConsumption();        void setMaxConsumption(double p);
+    int getThrottle();              void setThrottle(int p);
+    int getBrakes();                void setBrakes(int p);
+    double getConsumption();        void setConsumption(double p);
+    double getMaxConsumption();     void setMaxConsumption(double p);
 
 
 signals:

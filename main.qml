@@ -3,22 +3,12 @@ import volvera.de
 
 Window {
     id: mainWindow
-    width: 640
+    width: 565
     height: 480
     visible: true
     color: "black"
 
     property int my_heading
-
-    TimeDisplay{
-        id: timeDisplay
-        x:0
-        y:0
-        width: mainWindow.width
-        height: 30
-
-    }
-
 
     Vehicle {
         id : vehicle
@@ -36,8 +26,9 @@ Window {
 
         }
         onRpmChanged: {
-            //rpm_bars.rpm = vehicle.rpm;
+            velocity =1;
             rpm_gauge.v  = vehicle.rpm;
+
         }
         onConsumptionChanged: {
             consumption_gauge.rpm = vehicle.consumption
@@ -53,13 +44,37 @@ Window {
         }
     }
 
-
-    GearDisplay {
-        id: gear_display
-        max_gears: 6
-        cur_gear: 0
+    VelocityGauge {
+        id: v_gauge
+        x: 50
+        y: 100
+        width: 200
+        height: 200
+        mwidth: width
+        mheight: height
+        v_max: 240
+        v: 0
 
     }
+
+
+
+    TimeDisplay{
+        id: timeDisplay
+        x:0
+        y:0
+        width: mainWindow.width
+        height: 30
+
+    }
+
+    KeyListDisplay{
+        id: keyList
+        x:600
+        y:20
+        visible:false
+    }
+
 
 
     HeadingSlider{
@@ -85,18 +100,6 @@ Window {
 //    }
 
 
-    VelocityGauge {
-        id: v_gauge
-        x: 100
-        y: 50
-        width: 200
-        height: 200
-        mwidth: width
-        mheight: height
-        v_max: 240
-        v: 0
-
-    }
 
     MileageDisplay{
         id: mileage_display
@@ -127,7 +130,7 @@ Window {
         x: v_gauge.x + v_gauge.width + 5
         y: v_gauge.y
         width: 50
-        height:v_gauge.height;
+        height:v_gauge.height-gear_display.height-5;
 
         gWidth: width
         gHeight: height
@@ -136,8 +139,26 @@ Window {
         displayConsumption: true
     }
 
+    GearDisplay {
+        id: gear_display
+        x: v_gauge.x + v_gauge.width + 5
+        y: v_gauge.y+v_gauge.height-height
+        width:consumption_gauge.width
+        height:50
+
+        max_gears: 6
+        cur_gear: 0
+
+    }
+
     onMy_headingChanged: {
         hds.heading_value = my_heading;
+    }
+
+
+    RearCameraDisplay{
+        id: rearCameraDisplay
+        anchors.fill: parent;
     }
 
 
@@ -146,6 +167,7 @@ Window {
         id: huditem
         focus: true
         Keys.onPressed: {
+            rearCameraDisplay.is_visible=false
             if ( event.key === Qt.Key_Left )
             {
                 if (mainWindow.my_heading <= 0)  mainWindow.my_heading=359;
@@ -157,13 +179,16 @@ Window {
                 else mainWindow.my_heading = mainWindow.my_heading+1;
             }
             if ( event.key === Qt.Key_Up ) {
-                vehicle.velocity += 5;
+                //vehicle.velocity += 5;
                 vehicle.rpm += 200;
+
             }
 
             if ( event.key === Qt.Key_Down ) {
-                vehicle.velocity -= 5;
+//                vehicle.velocity -= 5;
                 vehicle.rpm -= 200;
+
+
             }
             if ( event.key === Qt.Key_C ) {
                 rpm_gauge.displayConsumption = !rpm_gauge.displayConsumption
@@ -174,11 +199,16 @@ Window {
             }
             if (event.key === Qt.Key_PageDown) {
                 vehicle.gear -= 1;
+                if (vehicle.gear ===-1){
+                    rearCameraDisplay.is_visible=true
+                    vehicle.velocity = 0;
+                    vehicle.rpm = vehicle.idleRPM
+                }
             }
             if (event.key === Qt.Key_R) {
+                rearCameraDisplay.is_visible=true
                 vehicle.velocity = 0;
                 vehicle.rpm = vehicle.idleRPM
-
                 vehicle.gear=-1;
             }
             if (event.key === Qt.Key_0) {

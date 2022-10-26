@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "qdebug.h"
 
 Engine::Engine() : Mileage("mileage.txt")
 {
@@ -59,6 +60,23 @@ void Engine::setMaxGear(int p){
     else maxGear = p;
     emit engineStateChanged();
 }
+
+
+int Engine::getThrottle() { return throttle;  }
+void Engine::setThrottle(int p) {
+    int thr_inc = p;
+
+    throttle = p;
+    emit engineStateChanged();
+}
+
+int Engine::getBrakes() { return brakes; }
+void Engine::setBrakes(int p) {
+    brakes = p;
+    emit engineStateChanged();
+}
+
+
 
 double Engine::getConsumption() {  return consumption; }
 void Engine::setConsumption(double p) {

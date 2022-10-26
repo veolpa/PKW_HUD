@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>mileage.txt</file>
-        <file>RearCameraDisplay.qml</file>
         <file>rearview.png</file>
     </qresource>
 </RCC>

@@ -10,13 +10,12 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 qt_add_executable(appPKW_HUD
     main.cpp
     heading.h heading.cpp
-    velocity.h velocity.cpp
     rpm_bar_gauge.h rpm_bar_gauge.cpp
     velocitygauge.h velocitygauge.cpp
     mileage.h mileage.cpp
     engine.h engine.cpp
     vehicle.h vehicle.cpp
-    res.qrc
+
 )
 
 qt_add_qml_module(appPKW_HUD
@@ -29,6 +28,11 @@ qt_add_qml_module(appPKW_HUD
         MileageDisplay.qml
         TimeDisplay.qml
         RearCameraDisplay.qml
+        KeyListDisplay.qml
+     RESOURCES
+        rearview.png
+
+
 )
 
 set_target_properties(appPKW_HUD PROPERTIES
