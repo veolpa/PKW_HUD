@@ -6,4 +6,4 @@ Seite-Hoch      - Gang hochschalten
 Seite-Runter    - Gang runterschalten
 0-6             - Gang einlegen (0 Leerlauf)
 R               - Rückwertsgang/Rück-Kamera einschalten
-
+S		- Zündung ein-/ausschalten
