@@ -14,12 +14,13 @@ class VelocityGauge : public QQuickPaintedItem
     Q_PROPERTY(int mheight READ mheight WRITE setHeight NOTIFY mheightChanged)
     Q_PROPERTY(int v_max READ v_max WRITE setV_max NOTIFY v_maxChanged)
     Q_PROPERTY(int v READ v WRITE setV NOTIFY vChanged)
+    Q_PROPERTY(bool isRPM READ isRpm WRITE setIsRpm)
 
     int m_width;
     int m_height;
     int m_v_max;
     int m_v;
-
+    bool isRPM {false};
 public:
     VelocityGauge( QQuickItem *parent = nullptr);
     void paint(QPainter *painter) override;
@@ -28,6 +29,7 @@ public:
     int mheight();       void setHeight(int p);
     int v_max();        void setV_max(int p);
     int v();            void setV(int p);
+    bool isRpm();       void setIsRpm(bool p);
 
 signals:
     void mwidthChanged();

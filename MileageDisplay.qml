@@ -16,11 +16,11 @@ Item {
         Text{
             id: mileage_text
             text: cur_mileage +" meter"
-            color: "#a6023b"
+            color: "lightblue"
             anchors.fill: mileage_rec
             fontSizeMode: Text.Fit
             minimumPixelSize: 10;
-            font.pixelSize: 72
+            font.pixelSize: 14
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
         }

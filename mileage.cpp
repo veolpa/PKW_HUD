@@ -3,18 +3,25 @@
 
 Mileage::Mileage(int p_mileage) {
     mileage = p_mileage;
+
+    messageDelay = new QTimer(this);
+    messageDelay->setTimerType(Qt::CoarseTimer);
+
+    connect (messageDelay, &QTimer::timeout, this, &Mileage::resetMessage);
+
     emit mileageChanged();
+
 }
 
 Mileage::Mileage(QString p_filename) {
     mileage_fname = p_filename;
     QFile f(mileage_fname);
     if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "mileage file not found ! Creating it...";
+        setMessage("mileage file not found ! creating it ...");;
         if(f.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream out(&f);
             out << QString::number(mileage);
-        } else qDebug() << "creation failed !";
+        } else setMessage("creation failed !");
     }
     f.close();
     readMileageFromFile();
@@ -62,7 +69,21 @@ void Mileage::writeMileageToFile() {
         out << contents;
         f.close();
     }
-    else qDebug() << "file not found !";
+    else setMessage("file not found !");
+}
+
+QString Mileage::getMessage() {  return info_message; }
+void Mileage::setMessage(QString p) {
+    if (p =="") {
+        info_message="";
+    } else {
+        info_message = p;
+        messageDelay->start();
+    }
+    emit newMessage();
+}
+void Mileage::resetMessage(){
+    setMessage("");
 }
 
 Mileage::~Mileage() {

@@ -3,8 +3,8 @@
 #include <QString>
 #include <QTextStream>
 #include <QFile>
-
 #include <QObject>
+#include <QTimer>
 
 class Mileage : public QObject
 {
@@ -12,7 +12,11 @@ class Mileage : public QObject
 
     Q_PROPERTY(int mileage READ getMileage WRITE setMileage NOTIFY mileageChanged)
     Q_PROPERTY(QString mileage_fname READ getMileageFName WRITE setMileageFName NOTIFY mileageFNameChanged)
+    Q_PROPERTY(QString info_message READ getMessage WRITE setMessage NOTIFY newMessage)
 
+
+    QString info_message{""};
+    QTimer* messageDelay;
 
 protected:
     QString mileage_fname{"mileage.txt"};       // Dateiname der Persistenz gelaufener Kilometer
@@ -32,9 +36,15 @@ public:
     void    readMileageFromFile();                 // setzt gelaufene km(mileage) auf den in Datei (mileage_fname) hinterlegten Wert
     void    writeMileageToFile();                  // schreibt gelaufene km in Datei(mileage_fname)
 
+    QString getMessage();
+    void    setMessage(QString p);
+public slots:
+    void resetMessage();
+
 signals:
     void mileageChanged();                      // wird emitiert wenn sich der Zustand des Objektes verändert
     void mileageFNameChanged();
+    void newMessage();
 };
 
 #endif // MILEAGE_H

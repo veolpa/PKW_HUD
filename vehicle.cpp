@@ -12,17 +12,14 @@ Vehicle::Vehicle() : Engine()
     connect (mileage_measure_timer, &QTimer::timeout, this, &Vehicle::measureDistance);
     connect (time_timer, &QTimer::timeout, this, &Vehicle::updateTime);
 
-    connect (this, &Engine::engineStateChanged, this, &Vehicle::velocityChanged);
+    connect (this, &Engine::engineStateChanged, this, &Vehicle::updateEngineState);
+
 
 }
 
 
-bool Vehicle::getIsMotorRunning(){
-    return isMotorRunning;
-}
-void Vehicle::setIsMotorRunning(bool p){
-    isMotorRunning = p;
-    emit engineStateChanged();
+void Vehicle::updateEngineState(){
+
 }
 
 
@@ -42,7 +39,7 @@ void Vehicle::setVelocity(int p){
     else if (v <= 0) velocity = 0;
     else velocity = v;
 
-    if (velocity > 0 ) mileage_measure_timer->start(1000);
+    if (velocity > 0 ) mileage_measure_timer->start(500);
     if (velocity  <= 0) mileage_measure_timer->stop();
 
     emit velocityChanged();
@@ -55,7 +52,7 @@ void Vehicle::setMaxVelocity(int p){
 }
 
 
-void Vehicle::setAccelerate(int p){
+//void Vehicle::setAccelerate(int p){
 //    brakes = 0;
 //    int RPM_increase = 500;
 
@@ -74,8 +71,8 @@ void Vehicle::setAccelerate(int p){
 //    emit velocityChanged();
 
 
-}
-void Vehicle::setDecelerate(int p){
+//}
+//void Vehicle::setDecelerate(int p){
 //    throttle = 0;
 //    if ( (velocity*3.6) > 80 ) velocity -= 10;
 //    else velocity -= 1;
@@ -88,7 +85,7 @@ void Vehicle::setDecelerate(int p){
 //    }
 
 //    emit velocityChanged();
-}
+//}
 
 
 
@@ -102,7 +99,7 @@ void Vehicle::setCurrentTime(QString p) {
 }
 
 void Vehicle::measureDistance(){
-    double traveled_distance = velocity * 0.1;
+    double traveled_distance = velocity * 0.25;
     addMileage(static_cast<int>(traveled_distance));
 }
 

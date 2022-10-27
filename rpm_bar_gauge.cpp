@@ -108,7 +108,7 @@ void RPM_Bar_Gauge::paint(QPainter *painter) {
     }
 
     int ty = (max_bars*bar_height)-((max_steps)*bar_height);
-    painter->drawText(QRect(0, ty+3, width, bar_height), Qt::AlignCenter,rpm_str );
+    painter->drawText(QRect(0, ty-1, width, bar_height), Qt::AlignCenter,rpm_str );
     //painter->restore();
 
 }
