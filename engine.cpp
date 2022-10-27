@@ -45,9 +45,20 @@ void Engine::setMaxRPM(int p){
 
 int Engine::getGear() {  return gear;  }
 void Engine::setGear(int p) {
-    if ( p < -1 )           gear = -1;
+    if ( p <= -1 )     {
+        gear = -1;
+        rpm = idleRPM;
+    }
     else if ( p > maxGear)  gear = maxGear;
-    else                    gear = p;
+    else{
+        if (p < gear){
+            rpm = static_cast<int>(static_cast<double>(gear-p)*1.3*rpm);
+        }
+        else if(p>gear) {
+            rpm =  static_cast<int>(static_cast<double>(p-gear)*0.7*rpm);
+        }
+        gear = p;
+    }
     emit engineStateChanged();
 }
 
