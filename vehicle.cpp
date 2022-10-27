@@ -17,6 +17,10 @@ Vehicle::Vehicle() : Engine()
 
 }
 
+bool Vehicle::getIgnition(){ return ignition; }
+void Vehicle::setIgnition(bool p) {
+    ignition = p;
+}
 
 void Vehicle::updateEngineState(){
 

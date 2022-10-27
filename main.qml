@@ -19,6 +19,7 @@ Window {
         maxConsumption: 30
         gear: 0
         maxGear: 6
+        ignition: false
 
         onVelocityChanged: {
             v_gauge.v = velocity;
@@ -139,6 +140,21 @@ Window {
         focus: true
         Keys.onPressed: {
             rearCameraDisplay.is_visible=false
+            if (event.key === Qt.Key_S) {
+                if (vehicle.ignition){
+                    vehicle.rpm = 0
+                    vehicle.velocity = 0
+                    vehicle.gear=0
+                    vehicle.ignition=false
+                }
+                else
+                {
+                    vehicle.rpm = vehicle.idleRPM
+                    vehicle.velocity = 0
+                    vehicle.gear=0
+                    vehicle.ignition=true
+                }
+            }
             if ( event.key === Qt.Key_Left )
             {
                 if (mainWindow.my_heading <= 0)  mainWindow.my_heading=359;

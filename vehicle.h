@@ -15,10 +15,12 @@ class Vehicle : public Engine
     Q_PROPERTY(int velocity READ getVelocity WRITE setVelocity NOTIFY velocityChanged)
     Q_PROPERTY(int maxVelocity READ getMaxVelocity WRITE setMaxVelocity NOTIFY velocityChanged)
     Q_PROPERTY(QString currentTime READ getCurrentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
+    Q_PROPERTY(bool ignition READ getIgnition WRITE setIgnition )
 
 //    Q_PROPERTY(int accelerate WRITE setAccelerate)
 //    Q_PROPERTY(int decelerate WRITE setDecelerate)
 
+    bool ignition{false};
 
     int velocity{0};
     int maxVelocity{240};
@@ -34,6 +36,9 @@ class Vehicle : public Engine
 
 public:
     Vehicle();
+
+    bool getIgnition();     void setIgnition(bool p);
+
 
     int getVelocity();      void setVelocity(int p);
     int getMaxVelocity();   void setMaxVelocity(int p);

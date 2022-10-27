@@ -26,8 +26,8 @@ void Engine::setIdleRPM(int p) {
 
 int Engine::getRPM() {  return rpm;  }
 void Engine::setRPM(int p){
-    if (p < idleRPM)        rpm = idleRPM;
-    else if ( p > maxRPM )  rpm = maxRPM;
+    //if (p < idleRPM)        rpm = idleRPM;
+    if ( p > maxRPM )  rpm = maxRPM;
     else                    rpm = p;
 
     double divisor {static_cast<double>(maxRPM)};                               // Der Verbrauch ist direkt proportional
