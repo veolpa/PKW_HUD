@@ -1,11 +1,10 @@
 #include "engine.h"
-#include "qdebug.h"
+
 
 Engine::Engine() : Mileage("mileage.txt")
 {
 
 }
-
 
 QString Engine::getDesignation(){ return designation; }
 void Engine::setDesignation(QString p){
@@ -24,8 +23,6 @@ void Engine::setIdleRPM(int p) {
     idleRPM = p;
     emit engineStateChanged();
 }
-
-
 
 int Engine::getRPM() {  return rpm;  }
 void Engine::setRPM(int p){
@@ -61,7 +58,6 @@ void Engine::setMaxGear(int p){
     emit engineStateChanged();
 }
 
-
 int Engine::getThrottle() { return throttle;  }
 void Engine::setThrottle(int p) {
     int thr_inc = p;
@@ -76,8 +72,6 @@ void Engine::setBrakes(int p) {
     emit engineStateChanged();
 }
 
-
-
 double Engine::getConsumption() {  return consumption; }
 void Engine::setConsumption(double p) {
     if (p > maxConsumption)     consumption = maxConsumption;
@@ -85,7 +79,6 @@ void Engine::setConsumption(double p) {
     else                        consumption = p;
     emit engineStateChanged();
 }
-
 
 double Engine::getMaxConsumption(){  return maxConsumption;}
 void Engine::setMaxConsumption(double p){

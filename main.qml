@@ -20,17 +20,13 @@ Window {
         gear: 0
         maxGear: 6
 
-        //info_message: "good morning mr Knight"
-
         onVelocityChanged: {
             v_gauge.v = velocity;
             mileage_display.cur_mileage = vehicle.mileage
-
         }
         onRpmChanged: {
             velocity =1;
             rpm_gauge.v  = vehicle.rpm;
-
         }
         onConsumptionChanged: {
             consumption_gauge.rpm = vehicle.consumption
@@ -44,13 +40,7 @@ Window {
         onCurrentTimeChanged:{
             timeDisplay.time = currentTime;
         }
-
-        onInfo_messageChanged: {
-            messageDisplay.msg = vehicle.info_message;
-        }
     }
-
-
 
     VelocityGauge {
         id: v_gauge
@@ -66,21 +56,12 @@ Window {
 
     }
 
-
-
     TimeDisplay{
         id: timeDisplay
         x:0
         y:25
         width: mainWindow.width
         height: 20
-    }
-
-    KeyListDisplay{
-        id: keyList
-        x:600
-        y:20
-        visible:false
     }
 
     HeadingSlider{
@@ -168,19 +149,15 @@ Window {
                 if (mainWindow.my_heading >= 359 ) mainWindow.my_heading=0;
                 else mainWindow.my_heading = mainWindow.my_heading+1;
             }
+
             if ( event.key === Qt.Key_Up ) {
                 vehicle.rpm += 200;
-
             }
 
             if ( event.key === Qt.Key_Down ) {
                 vehicle.rpm -= 200;
-
-
             }
-            if ( event.key === Qt.Key_S ) {
 
-            }
 
             if (event.key === Qt.Key_PageUp) {
                 vehicle.gear += 1;
@@ -228,16 +205,6 @@ Window {
             }
         }
     }
-
-    InfoMessageDisplay{
-        id: messageDisplay
-        x: 0
-        y: 100
-        width: mainWindow.width
-        height: 460
-        msg: ""
-    }
-
 }
 
 

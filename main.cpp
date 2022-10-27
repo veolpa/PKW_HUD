@@ -1,6 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
+#include "mileage.h"
+#include "engine.h"
+
 #include "heading.h"
 #include "rpm_bar_gauge.h"
 #include "velocitygauge.h"
@@ -23,11 +26,13 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-
     qmlRegisterType<Heading>        ("volvera.de", 1,0, "Heading");
+    qmlRegisterType<Heading>        ("volvera.de", 1,0, "Mileage");
+    qmlRegisterType<Heading>        ("volvera.de", 1,0, "Engine");
+    qmlRegisterType<Vehicle>        ("volvera.de", 1,0, "Vehicle");
     qmlRegisterType<RPM_Bar_Gauge>  ("volvera.de", 1,0, "RPM_Bar_Gauge");
     qmlRegisterType<VelocityGauge>  ("volvera.de", 1,0, "VelocityGauge");
-    qmlRegisterType<Vehicle>        ("volvera.de", 1,0, "Vehicle");
+
 
 
 //    QQuickView view;

@@ -28,8 +28,6 @@ qt_add_qml_module(appPKW_HUD
         MileageDisplay.qml
         TimeDisplay.qml
         RearCameraDisplay.qml
-        KeyListDisplay.qml
-        InfoMessageDisplay.qml
      RESOURCES
         rearview.png
 

@@ -1,13 +1,12 @@
 #include "mileage.h"
-#include "qdebug.h"
 
 Mileage::Mileage(int p_mileage) {
     mileage = p_mileage;
 
-    messageDelay = new QTimer(this);
-    messageDelay->setTimerType(Qt::CoarseTimer);
+//    messageDelay = new QTimer(this);
+//    messageDelay->setTimerType(Qt::CoarseTimer);
 
-    connect (messageDelay, &QTimer::timeout, this, &Mileage::resetMessage);
+    //connect (messageDelay, &QTimer::timeout, this, &Mileage::resetMessage);
 
     emit mileageChanged();
 
@@ -74,16 +73,16 @@ void Mileage::writeMileageToFile() {
 
 QString Mileage::getMessage() {  return info_message; }
 void Mileage::setMessage(QString p) {
-    if (p =="") {
-        info_message="";
-    } else {
-        info_message = p;
-        messageDelay->start();
-    }
-    emit newMessage();
+//    if (p =="") {
+//        info_message="";
+//    } else {
+//        info_message = p;
+//        messageDelay->start();
+//    }
+//    emit newMessage();
 }
 void Mileage::resetMessage(){
-    setMessage("");
+
 }
 
 Mileage::~Mileage() {
